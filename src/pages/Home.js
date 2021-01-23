@@ -17,7 +17,7 @@ function Home() {
       setColumns("two");
     }
     window.addEventListener("resize", () => {
-      if (window.innerWidth <= 668) {
+      if (window.innerWidth < 768) {
         setColumns("one");
       } else {
         setColumns("two");
@@ -25,7 +25,13 @@ function Home() {
     });
 
     return () => {
-      window.removeEventListener("resize");
+      window.removeEventListener("resize", () => {
+        if (window.innerWidth < 768) {
+          setColumns("one");
+        } else {
+          setColumns("two");
+        }
+      });
     };
   }, []);
 
