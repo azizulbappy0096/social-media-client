@@ -1,4 +1,4 @@
-.register__form {
+.register__form, .login__form {
     width: 400px;
     margin: 0 auto;
 }

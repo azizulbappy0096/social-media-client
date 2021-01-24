@@ -13,10 +13,24 @@ export const registerUser = gql`
       password: $password
       confirmPassword: $confirmPassword
     ) {
-        id
-        token
-        username
-        email
+      id
+      token
+      username
+      email
+    }
+  }
+`;
+
+export const loginUser = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(
+      username: $username
+      password: $password
+    ) {
+      id
+      token
+      username
+      email
     }
   }
 `;

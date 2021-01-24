@@ -98,7 +98,7 @@ function Register() {
         <div className="ui error message">
           <ul className="list">
             {Object.values(errors).map((value) => (
-              <li key={value}> {value} </li>
+              <li key={value}> {value ? value : "Unexpected server Error!!"} </li>
             ))}
           </ul>
         </div>
