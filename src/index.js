@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ApolloProvider from "./utils/ApolloProvider";
+import ReduxProvider from "./utils/ReduxProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider>
-      <App />
+      <ReduxProvider>
+        <App />
+      </ReduxProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Form, Grid } from "semantic-ui-react";
+import { Button, CommentAction, Form, Grid } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 // css
-import "./Register.css";
+import "./css/Register.css";
 
 // form hook
 import { useForm } from "../utils/FormHooks";
@@ -14,8 +14,13 @@ import { loginUser } from "../utils/graphql/userMutation";
 // validator
 import { loginValidator } from "../utils/validator/userValidator";
 
+// redux-store
+import { actionTypes } from "../utils/reducer/authReducer";
+import { useDispatch } from "react-redux";
+
 function Login() {
-    const history = useHistory();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const initialValues = {
     username: "",
@@ -24,23 +29,23 @@ function Login() {
   const { values, onChange, onSubmit } = useForm(initialValues, Login);
 
   const [login, { loading }] = useMutation(loginUser, {
-    update: (_, response) => {
-      console.log("response", response);
+    update: (_, { data: { login } }) => {
+      dispatch({
+          type: actionTypes.login,
+          user: login
+      })
     },
     onError: (err) => {
       setErrors({ ...errors, server: err.message.split(": ")[1] });
     },
     variables: values,
     onCompleted: (data) => {
-        history.replace("/")
-    }
+      history.replace("/");
+    },
   });
 
   function Login() {
-    const { valid, errors } = loginValidator(
-      values.username,
-      values.password
-    );
+    const { valid, errors } = loginValidator(values.username, values.password);
     if (valid) {
       setErrors({});
       login();
@@ -50,7 +55,11 @@ function Login() {
   }
 
   return (
-    <Form error onSubmit={onSubmit} className={`login__form ${loading ? "loading" : ""}`}>
+    <Form
+      error
+      onSubmit={onSubmit}
+      className={`login__form ${loading ? "loading" : ""}`}
+    >
       <Grid>
         <Grid.Row centered style={{ margin: "12px auto" }}>
           <h1> Login Account </h1>
@@ -78,7 +87,10 @@ function Login() {
         <div className="ui error message">
           <ul className="list">
             {Object.values(errors).map((value, index) => (
-              <li key={index}> {value ? value : "Unexpected server Error!!"} </li>
+              <li key={index}>
+                {" "}
+                {value ? value : "Unexpected server Error!!"}{" "}
+              </li>
             ))}
           </ul>
         </div>

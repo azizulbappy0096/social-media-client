@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
+// redux-store
+import { useSelector, useDispatch } from "react-redux";
+import { actionTypes } from "../../utils/reducer/authReducer";
+
 function MenuBar() {
+  const { user } = useSelector(reducer => reducer.authReducer);
+  const dispatch = useDispatch();
   const [activeItem, setActiveItem] = useState("");
 
     useEffect(() => {
@@ -17,7 +23,27 @@ function MenuBar() {
 
   return (
     <div>
-      <Menu pointing secondary>
+      { user ? (
+        <Menu pointing secondary>
+        <Menu.Item
+          content={user.username}
+          active
+        />
+
+        <Menu.Menu position="right">
+          <Menu.Item
+            name="LogOut"
+            onClick={() => {dispatch({
+              type: actionTypes.logout
+            })
+            setActiveItem("home")
+          }}
+            as={Link}
+          />
+        </Menu.Menu>
+      </Menu>
+      ) : (
+        <Menu pointing secondary>
         <Menu.Item
           name="Home"
           active={activeItem === "home"}
@@ -43,6 +69,7 @@ function MenuBar() {
           />
         </Menu.Menu>
       </Menu>
+      )}
     </div>
   );
 }
