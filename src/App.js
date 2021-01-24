@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
 // css
 import "semantic-ui-css/semantic.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 // menubar/navbar
@@ -49,10 +50,25 @@ function App() {
   return (
     <Router>
       <Container>
+        <Switch>
+        
+        <Route exact path="/">
         <MenuBar />
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={!user ? Login : Unavailable} />
-        <Route path="/register" component={!user ? Register : Unavailable} />
+        <Home />
+        </Route>
+        <Route path="/login">
+          {user ? <Unavailable /> : (<>
+            <MenuBar />
+            <Login />
+          </>)}
+        </Route>
+        <Route path="/register">
+          {user ? <Unavailable /> : (<>
+            <MenuBar />
+            <Register />
+          </>)}
+        </Route>
+        </Switch>
       </Container>
     </Router>
   );

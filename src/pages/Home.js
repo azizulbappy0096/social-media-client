@@ -1,12 +1,18 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Grid } from "semantic-ui-react";
+import CreatePost from "../components/CreatePost/CreatePost";
 import PostCard from "../components/PostCard/PostCard";
+
 
 // query
 import { allPost } from "../utils/graphql/postQuery";
 
+//
+import { useSelector } from "react-redux";
+
 function Home() {
+  const { user } = useSelector(reducer => reducer.authReducer);
   const { loading, error, data } = useQuery(allPost);
   const [columns, setColumns] = useState("two");
 
@@ -44,6 +50,9 @@ function Home() {
     } else if (data) {
       return (
         <Grid.Row>
+         {user ? ( <Grid.Column fluid="true">
+                <CreatePost />
+          </Grid.Column>) : ""}
           {data.getPosts.map((post) => {
             return (
               <Grid.Column fluid="true" key={post.id}>
