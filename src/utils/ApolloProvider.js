@@ -3,7 +3,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 
-const token = localStorage.getItem("_user")
+const token = localStorage.getItem("_user");
 
 const httpLink = createHttpLink({
     uri: "http://localhost:5000",

@@ -22,6 +22,7 @@ import jwt_decode from "jwt-decode";
 // redux-store
 import { useSelector, useDispatch } from "react-redux";
 import { actionTypes } from "./utils/reducer/authReducer";
+import SinglePost from "./pages/SinglePost";
 
 function App() {
   const { user } = useSelector(reducer => reducer.authReducer);
@@ -67,6 +68,11 @@ function App() {
             <MenuBar />
             <Register />
           </>)}
+        </Route>
+
+        <Route path="/post/:id">
+          <MenuBar />
+            <SinglePost />
         </Route>
         </Switch>
       </Container>
