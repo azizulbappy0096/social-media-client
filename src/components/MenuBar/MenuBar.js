@@ -38,6 +38,8 @@ function MenuBar() {
             })
             setActiveItem("home")
           }}
+          as={Link}
+          to="/"
           />
         </Menu.Menu>
       </Menu>
