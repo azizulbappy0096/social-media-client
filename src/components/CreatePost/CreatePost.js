@@ -46,7 +46,7 @@ function CreatePost() {
     <Form error onSubmit={onSubmit} className="post__form">
       <h4>Add Post</h4>
       <Form.Field>
-        <Form.Input
+        <Form.TextArea
           type="text"
           placeholder="Write something boss..."
           name="body"

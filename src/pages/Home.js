@@ -48,39 +48,53 @@ function Home() {
       return <h1> {error.message} </h1>;
     } else if (data) {
       return (
-        <Grid.Row>
-          {user ? (
-            <Grid.Column fluid="true">
-              <CreatePost />
-            </Grid.Column>
-          ) : (
-            ""
-          )}
+        // <Grid.Row centered>
+          
 
-          {data.getPosts && (
-            <Transition.Group animation="scale">
-              {data.getPosts.map((post) => {
-                return (
-                  <Grid.Column fluid="true" key={post.id}>
-                    <PostCard post={post} />
-                  </Grid.Column>
-                );
-              })}
-            </Transition.Group>
-          )}
-        </Grid.Row>
+        data.getPosts && (
+          <Transition.Group animation="scale">
+            {data.getPosts.map((post) => {
+              return (
+                <Grid.Column width="16" key={post.id}>
+                  <PostCard post={post} />
+                </Grid.Column>
+              );
+            })}
+          </Transition.Group>
+        )
+        // </Grid.Row>
       );
     }
   };
 
   return (
     <div className="home">
-      <Grid columns={columns}>
-        <Grid.Row centered style={{ marginTop: "12px" }}>
-          <h1> Recent Posts</h1>
-        </Grid.Row>
+      <Grid centered>
+        <Grid.Row columns="3">
+          <Grid.Column width="3">
+            <h1>aaaaaaa</h1>
+          </Grid.Column>
 
-        {displayPosts()}
+          <Grid.Column width="8" style={{ marginTop: "12px"}}>
+           
+           <Grid.Row style={{justifyContent: "center", marginBottom: "12px"}}>
+           <h1> Recent Posts</h1>
+           </Grid.Row>
+          
+            {user ? (
+            <Grid.Column >
+              <CreatePost />
+            </Grid.Column>
+          ) : (
+            ""
+          )}
+            {displayPosts()}
+          </Grid.Column>
+
+          <Grid.Column width="3">
+            <h1>wwwww</h1>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </div>
   );

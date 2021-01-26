@@ -1,3 +1,7 @@
 .postCard {
     margin-bottom: 12px !important;
 }
+
+.postCard__description {
+    max-height: 110px;
+}

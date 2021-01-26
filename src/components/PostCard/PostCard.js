@@ -1,7 +1,7 @@
-import React from "react";
-import { Card, Image, Button, Icon, Label } from "semantic-ui-react";
+import React, { useEffect, useState } from "react";
+import { Card, Image } from "semantic-ui-react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 //
 import "./PostCard.css";
@@ -25,13 +25,24 @@ function PostCard({
   },
 }) {
   const { user } = useSelector((reducer) => reducer.authReducer);
-  const handleLike = () => {
-    console.log("I am Like");
-  };
+  const history = useHistory();
+  const [formattedBody, setFormattedBody] = useState("");
 
-  const handleComment = () => {
-    console.log("I am comment");
-  };
+  useEffect(() => {
+    if(body.length > 120) {
+      let txt = body.substring(0, 120);
+      txt = txt.substring(0, txt.lastIndexOf(" "))
+      setFormattedBody(txt)
+    }else {
+      setFormattedBody(body)
+    }
+  }, [body]);
+
+  const handleViewMore = () => {
+    if(body.length > 120) {
+      history.push(`/post/${id}`)
+    }
+  }
 
   return (
     <Card fluid className="postCard">
@@ -45,7 +56,7 @@ function PostCard({
         <Card.Meta as={Link} to={`/post/${id}`}>
           {moment(createdAt).fromNow()}
         </Card.Meta>
-        <Card.Description>{body}</Card.Description>
+        <Card.Description style={body.length > 120 ? {cursor: "pointer"} : {}} onClick={handleViewMore} className="postCard__description">{formattedBody} {body.length > 120 && <span style={{fontWeight: "bold"}}> view more.... </span>} </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton

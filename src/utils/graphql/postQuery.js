@@ -89,3 +89,30 @@ export const likePostById = gql`
     }
   }
 `;
+
+export const createComment = gql`
+  mutation AddComment($postId: ID! $body: String!) {
+    addComment(postId: $postId body: $body) {
+      id 
+      comments {
+        id
+        username
+        createdAt
+      }
+    }
+  }
+`;
+
+export const deleteComment = gql`
+  mutation DeleteComment($postId: ID! $commentId: ID!) {
+    deleteComment(postId: $postId commentId: $commentId) {
+      id
+      commentCount 
+      comments {
+        id
+        username
+        createdAt
+      }
+    }
+  }
+`;
