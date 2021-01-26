@@ -4,7 +4,7 @@ import { Button, Confirm, Icon } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import { allPost, deletePostById, deleteComment } from "../../utils/graphql/postQuery";
 
-function DeleteButton({ postId, commentId, callBack }) {
+function DeleteButton({ postId, commentId, callBack, size }) {
     const [isConfirm, setIsConfirm] = useState(false);
   const [deletePost, { error }] = useMutation(commentId ? deleteComment : deletePostById, {
     variables: {
@@ -48,6 +48,7 @@ function DeleteButton({ postId, commentId, callBack }) {
         color="red"
         floated="right"
         onClick={() => setIsConfirm(true)}
+        size={size && size}
       >
         <Button.Content hidden>Delete</Button.Content>
         <Button.Content visible>

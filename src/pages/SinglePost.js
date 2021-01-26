@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Form, Grid, Button, Image, Card, Transition } from "semantic-ui-react";
+import {
+  Form,
+  Grid,
+  Button,
+  Image,
+  Card,
+  Transition,
+  Comment,
+  Header,
+} from "semantic-ui-react";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -86,101 +95,141 @@ function SinglePost() {
 
   return (
     <Grid style={{ marginTop: 12 }} centered>
-      <Grid.Row style={{justifyContent: "flex-start"}}>
-      <Button labelPosition='left' icon='left chevron' content='Back' onClick={handleRedirect} />
+      <Grid.Row style={{ justifyContent: "flex-start" }}>
+        <Button
+          labelPosition="left"
+          icon="left chevron"
+          content="Back"
+          onClick={handleRedirect}
+        />
       </Grid.Row>
       <Grid.Row>
-      {!isMobile && (
-        <Grid.Column width={2}>
-          <Image src="https://react.semantic-ui.com/images/avatar/large/steve.jpg" />
-        </Grid.Column>
-      )}
-      <Grid.Column width={columns}>
-        <Card fluid>
-          <Card.Content>
-            {isMobile && (
-              <Image
-                floated="right"
-                size="mini"
-                src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-              />
-            )}
-            <Card.Header> {data.getPost.username} </Card.Header>
-            <Card.Meta> {moment(data.getPost.createdAt).fromNow()} </Card.Meta>
-            <Card.Description>{data.getPost.body}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <LikeButton
-              user={user}
-              likes={data.getPost.likes}
-              likeCount={data.getPost.likeCount}
-              postId={data.getPost.id}
-            />
-            <CommentButton
-              commentCount={data.getPost.commentCount}
-              postId={data.getPost.id}
-            />
-
-            {user
-              ? user.username === data.getPost.username && (
-                  <DeleteButton
-                    callBack={handleRedirect}
-                    postId={data.getPost.id}
-                  />
-                )
-              : ""}
-          </Card.Content>
-        </Card>
-        {user && (
+        {!isMobile && (
+          <Grid.Column width={2}>
+            <Image src="https://react.semantic-ui.com/images/avatar/large/steve.jpg" />
+          </Grid.Column>
+        )}
+        <Grid.Column width={columns}>
           <Card fluid>
             <Card.Content>
-              <p> Post a comment: </p>
-              <Form onSubmit={submitComment}>
-                <div className="ui action input fluid">
-                  <textarea
-                    type="text"
-                    placeholder="Type here..."
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                    ref={commentInputRef}
-                    rows="3"
-                    style={{marginBottom: "6px"}}
-                  />
-                  
-                </div>
-                <button type="submit" className="ui button teal">
+              {isMobile && (
+                <Image
+                  floated="right"
+                  size="mini"
+                  src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+                />
+              )}
+              <Card.Header> {data.getPost.username} </Card.Header>
+              <Card.Meta>
+                {" "}
+                {moment(data.getPost.createdAt).fromNow()}{" "}
+              </Card.Meta>
+              <Card.Description>{data.getPost.body}</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <LikeButton
+                user={user}
+                likes={data.getPost.likes}
+                likeCount={data.getPost.likeCount}
+                postId={data.getPost.id}
+              />
+              <CommentButton
+                commentCount={data.getPost.commentCount}
+                postId={data.getPost.id}
+              />
+
+              {user
+                ? user.username === data.getPost.username && (
+                    <DeleteButton
+                      callBack={handleRedirect}
+                      postId={data.getPost.id}
+                    />
+                  )
+                : ""}
+            </Card.Content>
+          </Card>
+          {user && (
+            <Card fluid>
+              <Card.Content>
+                <p> Post a comment: </p>
+                <Form onSubmit={submitComment}>
+                  <div className="ui action input fluid">
+                    <textarea
+                      type="text"
+                      placeholder="Type here..."
+                      value={body}
+                      onChange={(e) => setBody(e.target.value)}
+                      ref={commentInputRef}
+                      rows="3"
+                      style={{ marginBottom: "6px" }}
+                    />
+                  </div>
+                  <button type="submit" className="ui button teal">
                     {" "}
                     Submit{" "}
                   </button>
-              </Form>
-            </Card.Content>
-          </Card>
-        )}
-        <Transition.Group animation="scale">
-          {data.getPost.comments.map((comment) => (
-            <Card fluid key={comment.id}>
-              <Card.Content>
-                {user &&
+                </Form>
+              </Card.Content>
+            </Card>
+          )}
+
+          <Comment.Group minimal size="large">
+            <Header as="h3" dividing>
+              Comments
+            </Header>
+            <Transition.Group animation="scale">
+              {data.getPost.comments.map((comment, index) => (
+                <Comment key={comment.id}>
+                  <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                  <Comment.Content>
+                    <Comment.Author as="a">{comment.username}</Comment.Author>
+                    <Comment.Metadata>
+                      <div>{moment(comment.createdAt).fromNow()}</div>
+                    </Comment.Metadata>
+                    <Comment.Text> {comment.body} </Comment.Text>
+                    <Comment.Actions>
+                    {user &&
                   (user.username === comment.username ? (
                     <DeleteButton
                       callBack={handleRedirect}
                       postId={data.getPost.id}
                       commentId={comment.id}
+                      size="mini"
                     />
                   ) : (
                     ""
                   ))}
-                <Card.Header> {comment.username} </Card.Header>
-                <Card.Meta> {moment(comment.createdAt).fromNow()} </Card.Meta>
-                <Card.Description> {comment.body} </Card.Description>
-              </Card.Content>
-            </Card>
-          ))}
-        </Transition.Group>
-      </Grid.Column>
+        </Comment.Actions>
+                  </Comment.Content>
+                  {index < data.getPost.comments.length - 1 && <hr />}
+                </Comment>
+              ))}
+            </Transition.Group>
+          </Comment.Group>
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   );
 }
 
 export default SinglePost;
+
+// {
+//    <Card fluid key={comment.id}>
+//               <Card.Content>
+//                 {user &&
+//                   (user.username === comment.username ? (
+//                     <DeleteButton
+//                       callBack={handleRedirect}
+//                       postId={data.getPost.id}
+//                       commentId={comment.id}
+//                     />
+//                   ) : (
+//                     ""
+//                   ))}
+//                 <Card.Header> {comment.username} </Card.Header>
+//                 <Card.Meta> {moment(comment.createdAt).fromNow()} </Card.Meta>
+//                 <Card.Description> {comment.body} </Card.Description>
+//               </Card.Content>
+//             </Card> 
+// }

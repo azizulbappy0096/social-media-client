@@ -92,7 +92,7 @@ function Home() {
           </Grid.Column>
 
           <Grid.Column width="3">
-            <h1>wwwww</h1>
+            
           </Grid.Column>
         </Grid.Row>
       </Grid>
