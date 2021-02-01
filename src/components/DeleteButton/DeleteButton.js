@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./DeleteButton.css"
+
 import { Button, Confirm, Icon } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import { allPost, deletePostById, deleteComment } from "../../utils/graphql/postQuery";

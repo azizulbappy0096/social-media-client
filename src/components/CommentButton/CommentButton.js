@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../LikeButton/LikeButton.css";
+
 import { Button, Label, Icon } from "semantic-ui-react";
 
 import { Link } from "react-router-dom";

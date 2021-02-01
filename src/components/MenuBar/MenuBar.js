@@ -22,9 +22,9 @@ function MenuBar() {
   };
 
   return (
-    <div>
+    <>
       { user ? (
-        <Menu pointing secondary>
+        <Menu pointing secondary fixed="top" style={{position: "sticky", background: "white"}}>
         <Menu.Item
           content={user.username}
           active
@@ -44,7 +44,7 @@ function MenuBar() {
         </Menu.Menu>
       </Menu>
       ) : (
-        <Menu pointing secondary>
+        <Menu pointing secondary fixed="top" style={{position: "sticky", background: "white"}}>
         <Menu.Item
           name="Home"
           active={activeItem === "home"}
@@ -71,7 +71,7 @@ function MenuBar() {
         </Menu.Menu>
       </Menu>
       )}
-    </div>
+    </>
   );
 }
 

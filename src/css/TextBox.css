@@ -1,0 +1,33 @@
+.textBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 8px 2px;
+}
+
+.textBox__inputBox {
+  display: flex;
+  align-items: center;
+  padding-right: 4px;
+  background-color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 150px;
+  background-color: #8e88883b;
+}
+
+.textBox__icon {
+  cursor: pointer !important;
+  font-size: 1.4em !important;
+  margin-bottom: 8px !important;
+}
+
+.textBox__input {
+  resize: none !important;
+  border: none !important;
+  background-color: #ece2e23b !important;
+}
+
+.textBox__input:focus {
+  outline: none !important;
+}

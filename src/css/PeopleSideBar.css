@@ -1,0 +1,9 @@
+.peopleBar {
+    padding: 8px;
+    margin-top: 20px;
+}
+
+.peopleBar__list {
+    max-height: 400px;
+    overflow-y: auto;
+}

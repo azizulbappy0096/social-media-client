@@ -4,6 +4,14 @@ import { Container } from "semantic-ui-react";
 // css
 import "semantic-ui-css/semantic.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./css/ContactBar.css";
+import "./css/Chat.css";
+import "./css/CreatePost.css";
+import "./css/DeleteButton.css";
+import "./css/LikeButton.css";
+import "./css/PeopleSideBar.css";
+import "./css/PostCard.css";
+import "./css/TextBox.css";
 import "./App.css";
 
 // menubar/navbar
@@ -50,7 +58,7 @@ function App() {
 
   return (
     <Router>
-      <Container>
+      {/* <Container> */}
         <Switch>
         
         <Route exact path="/">
@@ -75,7 +83,7 @@ function App() {
             <SinglePost />
         </Route>
         </Switch>
-      </Container>
+      {/* </Container> */}
     </Router>
   );
 }

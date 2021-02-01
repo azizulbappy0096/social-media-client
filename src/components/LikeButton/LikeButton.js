@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./LikeButton.css";
+
 import { Button, Label, Icon, Popup } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import { likePostById } from "../../utils/graphql/postQuery";

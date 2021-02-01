@@ -1,0 +1,27 @@
+.ui.sidebar {
+    top: 50px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+
+.contactBar {
+
+    padding: 8px;
+    margin-top: 20px;
+    
+
+}
+
+.contactBar h5 {
+    color: #65676b;
+}
+
+.contactBar__message--list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.contactBar__contact--list {
+    max-height: 300px;
+    overflow-y: auto;
+}

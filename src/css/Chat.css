@@ -1,0 +1,37 @@
+.chat__header {
+  right: 2%;
+  position: fixed;
+  bottom: 2%;
+  z-index: 100000 !important;
+}
+
+.chat__box {
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  width: 300px;
+  overflow: hidden;
+  border-radius: 4px;
+  z-index: 100000 !important;
+  background-color: rgb(255, 255, 255);
+  border-left: 1px solid #f1e5e5;
+  border-right: 1px solid #f1e5e5;
+}
+
+.chat__boxName {
+  margin-bottom: 0 !important;
+}
+
+
+.chat__boxHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1f7ac4;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.chat__msg {
+  height: 300px;
+}

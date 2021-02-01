@@ -4,13 +4,14 @@ import moment from "moment";
 import { Link, useHistory } from "react-router-dom";
 
 //
-import "./PostCard.css";
+
 import DeleteButton from "../DeleteButton/DeleteButton";
+import LikeButton from "../LikeButton/LikeButton";
+import CommentButton from "../CommentButton/CommentButton";
 
 // redux-store
 import { useSelector } from "react-redux";
-import LikeButton from "../LikeButton/LikeButton";
-import CommentButton from "../CommentButton/CommentButton";
+
 
 function PostCard({
   post: {

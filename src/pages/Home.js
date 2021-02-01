@@ -1,3 +1,5 @@
+import "./css/Home.css";
+
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Grid, Transition } from "semantic-ui-react";
@@ -9,6 +11,9 @@ import { allPost } from "../utils/graphql/postQuery";
 
 //
 import { useSelector } from "react-redux";
+import ContactBar from "../components/ContactBar/ContactBar";
+import PeopleSideBar from "../components/PeopleSideBar/PeopleSideBar";
+import Chat from "../components/Chat/Chat";
 
 function Home() {
   const { user } = useSelector((reducer) => reducer.authReducer);
@@ -71,11 +76,11 @@ function Home() {
     <div className="home">
       <Grid centered>
         <Grid.Row columns="3">
-          <Grid.Column width="3">
-            <h1>aaaaaaa</h1>
+          <Grid.Column width="4">
+          <PeopleSideBar />
           </Grid.Column>
 
-          <Grid.Column width="8" style={{ marginTop: "12px"}}>
+          <Grid.Column width="7" style={{ marginTop: "12px"}}>
            
            <Grid.Row style={{justifyContent: "center", marginBottom: "12px"}}>
            <h1> Recent Posts</h1>
@@ -91,11 +96,12 @@ function Home() {
             {displayPosts()}
           </Grid.Column>
 
-          <Grid.Column width="3">
-            
+          <Grid.Column width="4" className="home__rigthBar">
+            <ContactBar />
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <Chat />
     </div>
   );
 }
